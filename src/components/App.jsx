@@ -8,6 +8,12 @@ import Store from './Store'
 import Error404 from './Error404'
 
 const App = () => {
+  const products = [
+    { id: 1, name: 'Product 1' },
+    { id: 2, name: 'Product 2' },
+    { id: 3, name: 'Product 3' },
+    { id: 4, name: 'Product 4' }
+  ];
   return (
     <Container>
       <Menu>
@@ -19,7 +25,9 @@ const App = () => {
         <Switch>
           <Route path="/" component={Home} exact={true}></Route>
           <Route path="/blog" component={Blog}></Route>
-          <Route path="/store" component={Store}></Route>
+          <Route path="/store">
+            <Store products={products}></Store>
+          </Route>
           <Route component={Error404}></Route>
         </Switch>
       </main>
