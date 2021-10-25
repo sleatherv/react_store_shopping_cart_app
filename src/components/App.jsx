@@ -1,11 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink, Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import Blog from './Blog';
 import Store from './Store'
 import Error404 from './Error404'
+import ShoppingCart from './ShoppingCart';
 
 const App = () => {
   const products = [
@@ -14,6 +15,8 @@ const App = () => {
     { id: 3, name: 'Product 3' },
     { id: 4, name: 'Product 4' }
   ];
+  const [cart, changeCart] = useState([]);
+
   return (
     <Container>
       <Menu>
@@ -32,7 +35,7 @@ const App = () => {
         </Switch>
       </main>
       <aside>
-        <h3>Sidebar</h3>
+        <ShoppingCart cart={cart}></ShoppingCart>
       </aside>
     </Container>
   );
