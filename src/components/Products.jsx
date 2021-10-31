@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Products = ({ products }) => {
+const Products = ({ products, addProductToCart }) => {
 
   return (
     <>
@@ -11,7 +11,9 @@ const Products = ({ products }) => {
           return (
             <Product key={index}>
               <p>{product.name}</p>
-              <PButton>
+              <PButton
+                onClick={() => { addProductToCart(product.id, product.name) }}
+              >
                 Add to cart
               </PButton>
             </Product>

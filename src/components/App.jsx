@@ -17,6 +17,47 @@ const App = () => {
   ];
   const [cart, changeCart] = useState([]);
 
+  const addProductToCart = (idProductToAdd, productName) => {
+    if (cart.length === 0) {
+      changeCart([{
+        id: idProductToAdd,
+        name: productName,
+        qty: 1
+      }
+      ]);
+    } else {
+      // clone the cart array
+      const newCart = [...cart];
+      // We verify that the cart have the item
+      const itemInCart = newCart.filter((cartProduct) => {
+        return cartProduct.id === idProductToAdd
+      }).length > 0;
+      // if itemInCart is True, we have to update it
+      if (itemInCart) {
+        // search item position in array
+        newCart.forEach((cartProduct, index) => {
+          if (cartProduct.id === idProductToAdd) {
+            const currentQty = newCart[index].qty;
+            newCart[index] = {
+              id: idProductToAdd,
+              name: productName,
+              qty: currentQty + 1
+            }
+          }
+        });
+
+      } else {
+        newCart.push({
+          id: idProductToAdd,
+          name: productName,
+          qty: 1
+        })
+      }
+      //Updating the cart
+      changeCart(newCart);
+    }
+  }
+
   return (
     <Container>
       <Menu>
@@ -29,7 +70,9 @@ const App = () => {
           <Route path="/" component={Home} exact={true}></Route>
           <Route path="/blog" component={Blog}></Route>
           <Route path="/store">
-            <Store products={products}></Store>
+            <Store
+              products={products}
+              addProductToCart={addProductToCart}></Store>
           </Route>
           <Route component={Error404}></Route>
         </Switch>
