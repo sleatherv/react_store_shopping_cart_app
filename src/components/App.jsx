@@ -14,12 +14,7 @@ import reducer from '../reducers/storeReducer';
 const App = () => {
 
   const [cart, changeCart] = useState([]);
-  const products = [
-    { id: 1, name: 'Product A' },
-    { id: 2, name: 'Product B' },
-    { id: 3, name: 'Product C' },
-    { id: 4, name: 'Product D' }
-  ];
+
   const addProductToCart = (idProductToAdd, productName) => {
     if (cart.length === 0) {
       changeCart([{
@@ -77,7 +72,6 @@ const App = () => {
             <Route path="/blog" component={Blog}></Route>
             <Route path="/store">
               <Store
-                products={products}
                 addProductToCart={addProductToCart}></Store>
             </Route>
             <Route component={Error404}></Route>

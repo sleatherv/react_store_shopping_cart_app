@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 const Products = ({ products, addProductToCart }) => {
+
 
   return (
     <>
@@ -23,6 +25,8 @@ const Products = ({ products, addProductToCart }) => {
     </>
   );
 }
+
+
 
 const ProductsContainer = styled.div`
     display: grid;
@@ -62,4 +66,10 @@ const PButton = styled.button`
     }
 `;
 
-export default Products;
+const mapStateToProps = (state) => (
+  {
+    products: state.products
+  }
+);
+
+export default connect(mapStateToProps)(Products);
