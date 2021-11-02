@@ -7,16 +7,19 @@ import Blog from './Blog';
 import Store from './Store'
 import Error404 from './Error404'
 import ShoppingCart from './ShoppingCart';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducer from '../reducers/storeReducer';
 
 const App = () => {
-  const products = [
-    { id: 1, name: 'Product 1' },
-    { id: 2, name: 'Product 2' },
-    { id: 3, name: 'Product 3' },
-    { id: 4, name: 'Product 4' }
-  ];
-  const [cart, changeCart] = useState([]);
 
+  const [cart, changeCart] = useState([]);
+  const products = [
+    { id: 1, name: 'Product A' },
+    { id: 2, name: 'Product B' },
+    { id: 3, name: 'Product C' },
+    { id: 4, name: 'Product D' }
+  ];
   const addProductToCart = (idProductToAdd, productName) => {
     if (cart.length === 0) {
       changeCart([{
@@ -58,29 +61,33 @@ const App = () => {
     }
   }
 
+  const store = createStore(reducer);
+  console.log(store.getState());
   return (
-    <Container>
-      <Menu>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/blog">Blog</NavLink>
-        <NavLink to="/store">Store</NavLink>
-      </Menu>
-      <main>
-        <Switch>
-          <Route path="/" component={Home} exact={true}></Route>
-          <Route path="/blog" component={Blog}></Route>
-          <Route path="/store">
-            <Store
-              products={products}
-              addProductToCart={addProductToCart}></Store>
-          </Route>
-          <Route component={Error404}></Route>
-        </Switch>
-      </main>
-      <aside>
-        <ShoppingCart cart={cart}></ShoppingCart>
-      </aside>
-    </Container>
+    <Provider store={store}>
+      <Container>
+        <Menu>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/blog">Blog</NavLink>
+          <NavLink to="/store">Store</NavLink>
+        </Menu>
+        <main>
+          <Switch>
+            <Route path="/" component={Home} exact={true}></Route>
+            <Route path="/blog" component={Blog}></Route>
+            <Route path="/store">
+              <Store
+                products={products}
+                addProductToCart={addProductToCart}></Store>
+            </Route>
+            <Route component={Error404}></Route>
+          </Switch>
+        </main>
+        <aside>
+          <ShoppingCart cart={cart}></ShoppingCart>
+        </aside>
+      </Container>
+    </Provider>
   );
 }
 
