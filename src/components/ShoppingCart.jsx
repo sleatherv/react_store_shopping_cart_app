@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 
@@ -34,5 +35,9 @@ const ProductName = styled.p`
   font-size: 16px;
   color: #000;
 `
+const mapStateToProps = (state) => ({
+  cart: state.shoppingCart
+})
 
-export default ShoppingCart;
+
+export default connect(mapStateToProps)(ShoppingCart);

@@ -13,8 +13,6 @@ import reducer from '../reducers/storeReducer';
 
 const App = () => {
 
-  const [cart, changeCart] = useState([]);
-
   const addProductToCart = (idProductToAdd, productName) => {
     if (cart.length === 0) {
       changeCart([{
@@ -57,7 +55,7 @@ const App = () => {
   }
 
   const store = createStore(reducer);
-  console.log(store.getState());
+  // console.log(store.getState());
   return (
     <Provider store={store}>
       <Container>
@@ -78,7 +76,7 @@ const App = () => {
           </Switch>
         </main>
         <aside>
-          <ShoppingCart cart={cart}></ShoppingCart>
+          <ShoppingCart></ShoppingCart>
         </aside>
       </Container>
     </Provider>
