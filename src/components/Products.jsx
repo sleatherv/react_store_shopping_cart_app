@@ -14,7 +14,7 @@ const Products = ({ products, addProductToCart }) => {
             <Product key={index}>
               <p>{product.name}</p>
               <PButton
-                onClick={() => { addProductToCart(product.id, product.name) }}
+                onClick={() => addProductToCart(product.id, product.name)}
               >
                 Add to cart
               </PButton>
@@ -66,10 +66,23 @@ const PButton = styled.button`
     }
 `;
 
-const mapStateToProps = (state) => (
-  {
+const mapStateToProps = (state) => {
+  return {
     products: state.products
   }
-);
+};
 
-export default connect(mapStateToProps)(Products);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addProductToCart: (idProductToAdd, productName) => {
+      dispatch(
+        {
+          type: 'ADD_PRODUCT_TO_CART',
+          idProductToAdd: idProductToAdd,
+          name: productName
+        });
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
