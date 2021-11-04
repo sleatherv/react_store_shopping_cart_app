@@ -1,10 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 
 const ShoppingCart = ({ cart }) => {
-
   return (
     <>
       <h3>Shopping Cart</h3>
@@ -34,10 +33,14 @@ const ProductName = styled.p`
   font-weight: bold;
   font-size: 16px;
   color: #000;
-`
-const mapStateToProps = (state) => ({
-  cart: state.shoppingCart
-})
+`;
 
+
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart
+  }
+};
 
 export default connect(mapStateToProps)(ShoppingCart);
+
